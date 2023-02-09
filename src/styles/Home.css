@@ -2,6 +2,14 @@
   padding: 0 2rem;
 }
 
+
+.select-enter-container {
+  height: 200px;
+  position: sticky;
+  text-align: center;
+  word-spacing: 15px;
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
@@ -12,21 +20,13 @@
   align-items: center;
 }
 
-.title a {
-  color: #f213a4;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 8rem;
+  background: linear-gradient(to right,#E31837, #004C54);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .title,
@@ -35,15 +35,32 @@
 }
 
 .connect {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   margin-bottom: 2rem;
   width: 230px;
+}
+
+.enterbutton:hover {
+  box-shadow: 0 3px 5px 0 white, 0 0 12px 0 #fcf8e1;
+}
+
+
+.selector {
+  color: black;
+  text-align: center;
+  font-size: 32px;
+  padding: 14px 40px;
+  border-radius: 12px;
+  border: 2px solid black;
 }
 
 .description {
   margin-top: 3rem;
   margin-bottom: 2rem;
   line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 
 .code {
@@ -74,6 +91,7 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 350px;
+  font-size: 1.5rem;
 }
 
 .card:hover,
