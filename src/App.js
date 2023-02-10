@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 
 export default function Home() {
 
-
     const { contract } = useContract("0x31DCD6d797A39DC41A99b66eC8e0C689f41dc9c9");
     const { mutateAsync: addChoice, isLoading } = useContractWrite(contract, "addChoice");
     const [selectedValue, setSelectedValue] = useState('');
@@ -66,7 +65,6 @@ export default function Home() {
             <option value="1">Chiefs</option>
             <option value="2">Eagles</option>
           </select>
-
 
           <button class="card" onClick={call}>Enter</button>
 
