@@ -27,6 +27,7 @@
   background: linear-gradient(to right,#E31837, #004C54);
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin-bottom: 5px;
 }
 
 .title,
