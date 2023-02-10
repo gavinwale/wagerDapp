@@ -1,16 +1,22 @@
 import { ConnectWallet } from "@thirdweb-dev/react";
 import "./styles/Home.css";
 import { useContract, useContractWrite, Web3Button } from "@thirdweb-dev/react";
+import React, { useState } from 'react';
 
 export default function Home() {
 
 
     const { contract } = useContract("0x31DCD6d797A39DC41A99b66eC8e0C689f41dc9c9");
-    const { mutateAsync: addChoice, isLoading } = useContractWrite(contract, "addChoice")
-  
-    const call = async (userSelection) => {
+    const { mutateAsync: addChoice, isLoading } = useContractWrite(contract, "addChoice");
+    const [selectedValue, setSelectedValue] = useState('');
+
+    const handleChange = (event) => {
+      setSelectedValue(event.target.value);
+    };
+
+    const call = async () => {
       try {
-        const data = await addChoice([ userSelection ]);
+        const data = await addChoice([selectedValue]);
         console.info("contract call successs", data);
       } catch (err) {
         console.error("contract call failure", err);
@@ -27,7 +33,7 @@ export default function Home() {
         </div>
 
       {/* //////// TITLE ///////// */}
-        <h1 className="title">Superbowl Inu</h1>
+        <h1 className="title">Superbowl Wager</h1>
 
       {/* //////// DESCRIPTION ///////// */}
         <h2 className="description">
@@ -55,17 +61,19 @@ export default function Home() {
 
           <h2>Who you got?</h2>
 
-          <select className="card" id="teamSelector">
+          <select value={selectedValue} onChange={handleChange} className="card" id="teamSelector">
             <option value="">---</option>
+            console.log(selectedValue);
             <option value="1">Chiefs</option>
+            console.log(selectedValue);
             <option value="2">Eagles</option>
+            console.log(selectedValue);
           </select>
+
 
           <button class="card" onClick={call}>Enter</button>
 
         </div>
-
-        
 
       </main>
     </div>
