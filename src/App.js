@@ -63,11 +63,8 @@ export default function Home() {
 
           <select value={selectedValue} onChange={handleChange} className="card" id="teamSelector">
             <option value="">---</option>
-            console.log(selectedValue);
             <option value="1">Chiefs</option>
-            console.log(selectedValue);
             <option value="2">Eagles</option>
-            console.log(selectedValue);
           </select>
 
 
