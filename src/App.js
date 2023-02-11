@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 export default function Home() {
 
-    const { contract } = useContract("0x31DCD6d797A39DC41A99b66eC8e0C689f41dc9c9");
+    const { contract } = useContract("0x6aaFD8330fcD222435D5DEF3A28B61744EEbd1f0");
     const { mutateAsync: addChoice, isLoading } = useContractWrite(contract, "addChoice");
     const [selectedValue, setSelectedValue] = useState('');
 
