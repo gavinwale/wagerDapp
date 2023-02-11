@@ -42,7 +42,7 @@ export default function Home() {
       {/* //////// IMPORTANT LINKS ///////// */}
         <div className="grid">
 
-        <a href="https:dextools.io" className="card">
+        <a href="https://www.dextools.io/app/en/ether/pair-explorer/0xa57cBC7F6757590fFA58AC3AEFA52C915a07D56F" className="card">
           <img width="90" height="90" src="https://i.ibb.co/rsQVPq5/dextools-Logo.png" alt="dextools-Logo" border="0"/>
         </a>
         <a href="https://t.me/SBWPortal" className="card">
