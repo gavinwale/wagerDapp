@@ -45,13 +45,13 @@ export default function Home() {
         <a href="https:dextools.io" className="card">
           <img width="90" height="90" src="https://i.ibb.co/rsQVPq5/dextools-Logo.png" alt="dextools-Logo" border="0"/>
         </a>
-        <a href="https://telegram.org" className="card">
+        <a href="https://t.me/SBWPortal" className="card">
           <img width="90" height="90" src="https://i.ibb.co/FbvKg0C/telegram-Logo.png" alt="telegram-Logo" border="0"/>
         </a>
-        <a href="https://twitter.com" className="card">
+        <a href="https://twitter.com/WagerSuperbowl" className="card">
           <img width="90" height="90" src="https://i.ibb.co/dtwRKHg/twitter-Logo.png" alt="twitter-Logo" border="0"/>
         </a>
-        <a href="https://goerli.etherscan.io/address/0x31dcd6d797a39dc41a99b66ec8e0c689f41dc9c9" className="card">
+        <a href="https://etherscan.io/token/0x6aafd8330fcd222435d5def3a28b61744eebd1f0" className="card">
           <img width="90" height="90" src="https://i.ibb.co/4WWmKJc/etherscan-Logo.png" alt="View contract" />
         </a>
         </div>
