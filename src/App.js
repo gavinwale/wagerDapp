@@ -70,6 +70,11 @@ export default function Home() {
 
         </div>
 
+        <div id="dexscreener-embed">
+          <iframe src="https://dexscreener.com/ethereum/0xa57cBC7F6757590fFA58AC3AEFA52C915a07D56F?embed=1">
+          </iframe>
+        </div>
+
       </main>
     </div>
   );
