@@ -1,17 +1,22 @@
 import { ConnectWallet } from "@thirdweb-dev/react";
 import "./styles/Home.css";
-import { useContract, useContractWrite, Web3Button } from "@thirdweb-dev/react";
+import { useContract, useContractWrite, useContractRead, Web3Button, isLoading } from "@thirdweb-dev/react";
 import React, { useState } from 'react';
 
-export default function Home() {
+export default async function Home() {
 
     const { contract } = useContract("0x6aaFD8330fcD222435D5DEF3A28B61744EEbd1f0");
     const { mutateAsync: addChoice, isLoading } = useContractWrite(contract, "addChoice");
     const [selectedValue, setSelectedValue] = useState('');
+    const { chiefsData } = useContractRead(contract, "getChiefsCount");
+    const { eaglesData } = useContractRead(contract, "getEaglesCount");
+
 
     const handleChange = (event) => {
       setSelectedValue(event.target.value);
     };
+
+
 
     const call = async () => {
       try {
@@ -56,6 +61,15 @@ export default function Home() {
         </a>
         </div>
 
+      {/* //////// BET COUNTS ///////// */}
+        <div className="grid">
+          <p value="chiefsCount"></p>
+
+          <p value="eaglesCount"></p>
+        </div>
+
+
+        {/* //////// BET ENTRY ///////// */}
         <div className="select-enter-container">
 
           <h2>Who you got?</h2>
