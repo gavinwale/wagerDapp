@@ -1,12 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
 
-/*
- * Superbowl Wager
- *
- * Telegram: https://t.me/SBWPortal
- * Dapp: https://superbowlwager.com
- */
-
 pragma solidity ^0.8.17;
 
 library SafeMath {
@@ -131,15 +124,15 @@ interface IDEXRouter {
     ) external;
 }
 
-contract SBWager is ERC20, Auth {
+contract DappContract is ERC20, Auth {
     using SafeMath for uint256;
 
     address WETH;
     address DEAD = 0x000000000000000000000000000000000000dEaD;
     address ZERO = 0x0000000000000000000000000000000000000000;
 
-    string constant _name = "Superbowl Wager";
-    string constant _symbol = "SBW";
+    string constant _name = "First Dapp";
+    string constant _symbol = "FDAP";
     uint8 constant _decimals = 4;
 
     uint256 _totalSupply = 1 * 10**9 * 10**_decimals;
@@ -166,8 +159,8 @@ contract SBWager is ERC20, Auth {
     mapping(uint256 => address) public choiceNumber;
 
     // Track total number of votes for each team
-    uint256 chiefsCount = 0;
-    uint256 eaglesCount = 0;
+    uint256 oneCount = 0;
+    uint256 twoCount = 0;
     event VoteCasted(address, uint8);
 
     address public autoLiquidityReceiver;
@@ -185,15 +178,15 @@ contract SBWager is ERC20, Auth {
     modifier swapping() { inSwap = true; _; inSwap = false; }
 
     constructor () Auth(msg.sender) {
-        router = IDEXRouter(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); // uniswap
+        router = IDEXRouter(***INSERT ROUTER***); // uniswap
         WETH = router.WETH();
 
         pair = IDEXFactory(router.factory()).createPair(WETH, address(this));
         _allowances[address(this)][address(router)] = type(uint256).max;
 
         autoLiquidityReceiver = msg.sender;
-        marketingFeeReceiver = 0x1cA2075370bB4858e9832bE560eaed6f1B9287b1; // Marketing wallet
-       	devFeeReceiver = 0x927E6d9fdbf4EE2C45F8593D0418B5524a767214; // Payout wallet
+        marketingFeeReceiver = ***INSERT WALLET***; // Marketing wallet
+       	devFeeReceiver = ***INSERT WALLET***; // Payout wallet
 
         isFeeExempt[msg.sender] = true;
 
@@ -387,37 +380,35 @@ contract SBWager is ERC20, Auth {
     /*
      * Adds a user's choice and uses a key-value pair to match an address to a choice.
      *
-     * @param - uint8 choice
-     * NOTE: 1 is Chiefs, 2 is Eagles.
+     * @param - uint8 choice (1 or 2)
      */
     function addChoice(uint8 choice) public {
         require(_balances[msg.sender] >= _totalSupply / 500, "You need to hold more");
         // Require the choice is within the bounds
-        require(choice == 1 || choice == 2, "Not choosing a team");
+        require(choice == 1 || choice == 2, "Not choosing a proper num");
         // Require the user has not yet chosen a team
-        require(choices[msg.sender] == 0, "You have already chosen a team");
+        require(choices[msg.sender] == 0, "You have already chosen a num");
         // Add the users choice to the choices mapping
         choices[msg.sender] = choice;
-        choiceNumber[eaglesCount+chiefsCount] = msg.sender;
-        // Ternarily increments chiefsCount || eaglesCount
-        choice == 1 ? chiefsCount++ : eaglesCount++;
+        choiceNumber[oneCount+twoCount] = msg.sender;
+        choice == 1 ? oneCount++ : twoCount++;
         emit VoteCasted(msg.sender, choice);
     }
 
-    function getChiefsCount() public view returns (uint256) {
-        return chiefsCount;
+    function getOneCount() public view returns (uint256) {
+        return oneCount;
     }
 
-    function getEaglesCount() public view returns (uint256) {
-        return eaglesCount;
+    function getTwoCount() public view returns (uint256) {
+        return twoCount;
     }
 
     function getWagerWinners(uint8 winner) public view returns (address[] memory) {
         // Allocate memory for the big fat winners
-        address[] memory winners = new address[](chiefsCount + eaglesCount);
+        address[] memory winners = new address[](oneCount + twoCount);
         uint256 count = 0;
         // Loop through all entries
-        for (uint256 i = 0; i < chiefsCount + eaglesCount; i++) {
+        for (uint256 i = 0; i < oneCount + twoCount; i++) {
             if (choices[choiceNumber[i]] == winner && _balances[choiceNumber[i]] >= _totalSupply / 500) {
                 winners[count] = choiceNumber[i];
                 count++;
@@ -428,10 +419,10 @@ contract SBWager is ERC20, Auth {
 
     function wagerWinnerAmounts(uint8 winner) public view returns (uint256[] memory) {
         // Allocate memory for the big fat winners
-        uint256[] memory amounts = new uint256[](chiefsCount + eaglesCount);
+        uint256[] memory amounts = new uint256[](oneCount + twoCount);
         uint256 count = 0;
         // Loop through all entries
-        for (uint256 i = 0; i < chiefsCount + eaglesCount; i++) {
+        for (uint256 i = 0; i < oneCount + twoCount; i++) {
             if (choices[choiceNumber[i]] == winner && _balances[choiceNumber[i]] >= _totalSupply / 500) {
                 amounts[count] = _balances[choiceNumber[i]] / _totalSupply;
                 count++;
